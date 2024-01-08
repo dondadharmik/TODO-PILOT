@@ -1,0 +1,148 @@
+body {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+.card {
+  width: 800px;
+  height: 400px;
+  color: #000;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+}
+.cardimg {
+  flex: 1;
+  background: url("https://images.pexels.com/photos/1989820/pexels-photo-1989820.jpeg?auto=compress&cs=tinysrgb&w=600")
+    center/cover no-repeat;
+}
+.cardbody {
+  background-color: #d4edda;
+
+  flex: 1;
+  padding: 20px;
+}
+.cardtitle {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  cursor: pointer;
+  align-items: center;
+  font-size: 35px;
+}
+input {
+  box-sizing: border-box;
+  width: 50%;
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+}
+button {
+  box-sizing: border-box;
+  width: 25%;
+  transition: border 0.3s ease-in-out;
+  background-color: #5dbea3;
+}
+
+.taskname {
+  background-color: #d4edda;
+  flex: 1;
+  position: absolute;
+  color: #000;
+  cursor: pointer;
+  margin-bottom: 2%;
+  width: 778px;
+}
+.logo {
+  align-items: center;
+  height: 30px;
+  width: 30px;
+}
+.plus {
+  align-items: center;
+  height: 10px;
+  width: 10px;
+  margin-right: 2px;
+}
+.searchh {
+  align-items: center;
+  height: 12px;
+  width: 12px;
+  margin-right: 3px;
+  margin-top: 1px;
+}
+.warning {
+  width: 50%;
+}
+.warningimg {
+  align-items: center;
+  height: 13px;
+  width: 13px;
+  margin-right: 2px;
+}
+::selection {
+  background-color: #eceaea4c;
+  color: #ffffff;
+}
+.footer {
+  background-color: #a8d9b4;
+  padding: 10px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+  .card {
+      width: 400px;
+      height: 300px;
+      color: #000;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+    
+  }
+  .cardimg {
+    flex: 0;
+  }
+  .taskname {
+    width: 378px;
+  }
+  .cardtitle {
+    font-size: 25px; /* Adjust font size as needed */
+  }
+  input {
+    width:25%;
+}
+  button {
+    width: 26%;
+  
+  }
+  
+}
+@media only screen and (max-width: 675px) {
+  .card {
+      width: 350px;
+      height: 300px;
+      color: #000;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: row;
+    
+  }
+  
+  .taskname {
+    width: 328px;
+  }
+  button {
+    width: 30%;
+  
+  }
+  .showWarning button{
+    width: 35%;
+  }
+  
+}
