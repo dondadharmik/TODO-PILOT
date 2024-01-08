@@ -164,7 +164,7 @@ const TodoMain = () => {
           })}
          
         </div>          
-        <div className={classes.footer}> <p>&copy; 2024 TODO PILOT</p></div>
+        <div className={classes.footer}> <p>&copy; 2024 TODO PILOT All Rights Reserved</p></div>
 
       </div>
       <BackToTopButton/>
