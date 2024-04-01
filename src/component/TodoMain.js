@@ -176,7 +176,7 @@ const TodoMain = () => {
         </div>
         <div className={classes.footer}>
           {" "}
-          <p>&copy; 2023 TODO PILOT</p>
+          <p>&copy; 2024 TODO PILOT</p>
         </div>
       </div>
       <BackToTopButton />
