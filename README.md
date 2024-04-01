@@ -20,7 +20,7 @@
  # To run this project locally, follow these steps:
 
  # Clone the repository:
-  git clone <repository_url>
+  git clone https://github.com/dondadharmik/TODO-PILOT.git
 
  # Install dependencies:
    npm install
