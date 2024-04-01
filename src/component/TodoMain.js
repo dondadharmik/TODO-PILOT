@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./TodoMain.module.css";
 import BackToTopButton from "../Button/BackToTopButton";
+
 const TodoMain = () => {
   const [t1, setT1] = useState([]);
   const [text, setText] = useState("");
@@ -8,9 +9,17 @@ const TodoMain = () => {
   const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
   const [showWarning, setShowWarning] = useState(false);
 
+  // Load tasks from local storage on component mount
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks) {
+      setT1(storedTasks);
+    }
+  }, []);
+
   const deleteTask = (taskName) => {
-    setT1(
-      t1.filter((task) => {
+    setT1((prevTasks) =>
+      prevTasks.filter((task) => {
         if (task !== taskName) {
           return true;
         } else {
@@ -18,7 +27,10 @@ const TodoMain = () => {
         }
       })
     );
+    // Update local storage after deleting task
+    localStorage.setItem("tasks", JSON.stringify(t1.filter(task => task !== taskName)));
   };
+
   const handleShowWarning = () => {
     setShowWarning(true);
   };
@@ -36,42 +48,46 @@ const TodoMain = () => {
     } else {
       try {
         // Make a POST request to add the task to Firebase
-        const response = await fetch('https://dark-todo-pilot-default-rtdb.firebaseio.com/DARK-TODO-PILOT.json', {
-          method: 'POST',
-          body: JSON.stringify({ task: text }),
-          headers: {
-            'Content-Type': 'application/json'
+        const response = await fetch(
+          "https://dark-todo-pilot-default-rtdb.firebaseio.com/DARK-TODO-PILOT.json",
+          {
+            method: "POST",
+            body: JSON.stringify({ task: text }),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        });
-  
+        );
+
         if (!response.ok) {
-          throw new Error('Failed to add task to Firebase');
+          throw new Error("FAILED TO ADD TASK TO FIREBASE");
         }
-  
+
         // Update the local state
         setT1([...t1, text]);
         setText("");
+        // Update local storage after adding task
+        localStorage.setItem("tasks", JSON.stringify([...t1, text]));
       } catch (error) {
         console.error(error);
         // Handle error
       }
     }
   }
-  
+
   function handleChange(e) {
     setText(e.target.value);
   }
   function handleSearch(ev) {
     setSearch(ev.target.value);
-  }  
+  }
   const list = t1.filter((t) => t.includes(search));
   const todoListStyle = {
-    height: `${list.length*8}vh`,
+    height: `${list.length * 8}vh`,
     border: "1px solid #ccc",
     padding: "10px",
     overflowY: "auto",
   };
-
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
@@ -87,7 +103,7 @@ const TodoMain = () => {
           <h2 className={classes.cardtitle}>
             <img
               className={classes.logo}
-              src="	https://cdn-icons-png.flaticon.com/128/2387/2387635.png"
+              src="https://cdn-icons-png.flaticon.com/128/2387/2387635.png"
               alt=""
             />{" "}
             TODO PILOT
@@ -103,8 +119,7 @@ const TodoMain = () => {
           <button onClick={handleTodolist}>
             <img
               className={classes.plus}
-              src="	https://cdn-icons-png.flaticon.com/128/1237/1237946.png
-"
+              src="https://cdn-icons-png.flaticon.com/128/1237/1237946.png"
               alt=""
             />
             ADD TASK
@@ -114,8 +129,7 @@ const TodoMain = () => {
           <button>
             <img
               className={classes.searchh}
-              src="https://cdn-icons-png.flaticon.com/128/16/16492.png
-"
+              src="https://cdn-icons-png.flaticon.com/128/16/16492.png"
               alt=""
             />
             SEARCH
@@ -124,8 +138,7 @@ const TodoMain = () => {
           <button className={classes.warning} onClick={handleShowWarning}>
             <img
               className={classes.warningimg}
-              src="	https://cdn-icons-png.flaticon.com/512/61/61053.png
-"
+              src="https://cdn-icons-png.flaticon.com/512/61/61053.png"
               alt=""
             />
             SHOW INSTRUCTIONS
@@ -137,11 +150,11 @@ const TodoMain = () => {
               <button onClick={handleHideWarning}>&#10006; CANCLE</button>
             </div>
           )}
-           {!enteredNameIsValid  && (
-                  <p style={{ color: "#d9534f", fontSize: "20px" }}>
-                    TASK MUST NOT BE EMPTY
-                  </p>
-                )}
+          {!enteredNameIsValid && (
+            <p style={{ color: "#d9534f", fontSize: "20px" }}>
+              TASK MUST NOT BE EMPTY
+            </p>
+          )}
         </div>
       </div>
 
@@ -156,18 +169,17 @@ const TodoMain = () => {
           {list.map((task, index) => {
             return (
               <div key={index} style={{ marginBottom: "10px" }}>
-                
                 <h1 onDoubleClick={() => deleteTask(task)}>{task}</h1>
               </div>
-             
             );
           })}
-         
-        </div>          
-        <div className={classes.footer}> <p>&copy; 2024 TODO PILOT All Rights Reserved</p></div>
-
+        </div>
+        <div className={classes.footer}>
+          {" "}
+          <p>&copy; 2023 TODO PILOT</p>
+        </div>
       </div>
-      <BackToTopButton/>
+      <BackToTopButton />
     </div>
   );
 };
