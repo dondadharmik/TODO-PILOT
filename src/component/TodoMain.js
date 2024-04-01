@@ -5,7 +5,7 @@ import BackToTopButton from "../Button/BackToTopButton";
 const TodoMain = () => {
   const [t1, setT1] = useState([]);
   const [text, setText] = useState("");
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");  
   const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
   const [showWarning, setShowWarning] = useState(false);
 
